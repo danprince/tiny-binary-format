@@ -1,0 +1,27 @@
+{
+  "name": "tiny-binary-format",
+  "version": "0.0.1",
+  "description": "Memory efficient JS using binary rather than objects",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/danprince/tiny-binary-format.git"
+  },
+  "keywords": [
+    "binary",
+    "format",
+    "tiny"
+  ],
+  "author": "Dan Prince <danthedev.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/danprince/tiny-binary-format/issues"
+  },
+  "homepage": "https://github.com/danprince/tiny-binary-format",
+  "devDependencies": {
+    "mocha": "^2.2.5"
+  }
+}
