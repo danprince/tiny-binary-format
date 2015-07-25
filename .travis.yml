@@ -1,0 +1,3 @@
+lang: node_js
+node_js:
+  - "0.12"
