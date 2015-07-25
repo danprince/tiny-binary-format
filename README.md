@@ -3,7 +3,7 @@
 # tiny-binary-format
 Memory efficient JS using binary formats instead of objects.
 
-```
+```js
 var BinaryFormat = require('tiny-binary-format');
 
 var Tile = new BinaryFormat([
@@ -24,15 +24,13 @@ Tile.unpackArray(2145);
 
 This library is designed to be used as a very thin wrapper around dealing with binary data yourself.
 
-Define a format by creating an instance of `BinaryFormat` and passing in your field specifications.
-
-Then call the resulting object, passing instance data as arguments in order to create a binary representation.
+Define a format by creating an instance of `BinaryFormat` and passing in your field specifications. Then call the resulting object, passing instance data as arguments in order to create a binary representation.
 
 When you need to read the values back, pass the number to either `.unpack` which returns the values in an object, or `.unpackArray` which returns them in an array.
 
 ## Install
 
-```
+```bash
 npm install tiny-binary-format
 ```
 
