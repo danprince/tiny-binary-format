@@ -1,24 +1,22 @@
-module.exports = BinaryFormat;
-
-function BinaryFormat(blocks) {
+function BinaryFormat(fields) {
   this.start = 0;
-  this.end = blocks.length - 1;
+  this.end = fields.length - 1;
 
-  this.blocks = blocks.map(function(block) {
+  this.fields = fields.map(function(field) {
     // turns int:n into 2^n-1 where n > 0
-    block.mask = (2 << (block.bits - 1)) - 1;
-    return block;
+    field.mask = (2 << (field.length - 1)) - 1;
+    return field;
   });
 }
 
 BinaryFormat.prototype.pack = function() {
-  var packed, block, i;
+  var packed, field, i;
 
   for(i = this.start; i <= this.end; i++) {
-    block = this.blocks[i];
+    field = this.fields[i];
 
     // make space for the next value
-    packed <<= block.bits;
+    packed <<= field.length;
     // store the value
     packed |= arguments[i];
   }
@@ -32,11 +30,11 @@ BinaryFormat.prototype.unpack = function(packed) {
   unpacked = {};
 
   for(i = this.end; i >= this.start; i--) {
-    block = this.blocks[i];
+    field = this.fields[i];
     // use the mask to separate the relevant bits
-    unpacked[block.name] = packed & block.mask;
-    // shift on for the next block
-    packed >>= block.bits;
+    unpacked[field.name] = packed & field.mask;
+    // shift on for the next field
+    packed >>= field.length;
   }
 
   return unpacked;
@@ -48,13 +46,17 @@ BinaryFormat.prototype.unpackArray = function(packed) {
   unpacked = [];
 
   for(i = this.end; i >= this.start; i--) {
-    block = this.blocks[i];
+    field = this.fields[i];
     // use the mask to separate the relevant bits
-    unpacked.push(packed & block.mask);
-    // shift on for the next block
-    packed >>= block.bits;
+    unpacked.unshift(packed & field.mask);
+    // shift on for the next field
+    packed >>= field.length;
   }
 
   return unpacked;
 };
+
+if(typeof module !== 'undefined' && module.exports) {
+  module.exports = BinaryFormat;
+}
 
