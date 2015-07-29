@@ -123,4 +123,43 @@ describe('Tiny Binary Format', function() {
       });
     });
   });
+
+  describe('#unpackField', function() {
+    var testCases;
+
+    beforeEach(function() {
+      testCases = [
+        { input: [26, 2, 0] },
+        { input: [125, 5, 1] },
+        { input: [3, 99, 1] },
+        { input: [88, 99, 1] }
+      ];
+    });
+
+    it('should be a function', function() {
+      assert.equal(typeof Tile.unpackField, 'function');
+    });
+
+    it('should return an integer', function() {
+      testCases.forEach(function(test) {
+        var packed = Tile.pack.apply(Tile, test.input);
+
+        Tile.fields.forEach(function(field) {
+          var unpackedField = Tile.unpackField(packed, field.name);
+          assert.equal(typeof unpackedField, 'number');
+        });
+      });
+    });
+
+    it('should be reversible', function() {
+      testCases.forEach(function(test) {
+        var packed = Tile.pack.apply(Tile, test.input);
+
+        Tile.fields.forEach(function(field, i) {
+          var unpackedField = Tile.unpackField(packed, field.name);
+          assert.equal(unpackedField, test.input[i]);
+        });
+      });
+    });
+  });
 });
