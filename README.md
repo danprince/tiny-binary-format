@@ -37,10 +37,11 @@ npm install tiny-binary-format
 ## Gotchas
 The module was designed for storing lightweight tile representations for games, however it could be used for a lot of other things too. Just remember that once the data has been serialized, __it will always be read back out as numbers__.
 
-## Error Handling
 This module should be used for removing the _neccessity_ of working with bitwise operators when dealing with binary formats. It's not a framework and it won't hold your hand.
 
-This module __does no error handling whatsoever__. If you pass in a 9 bit number into an 8 bit field, you'll lose precision silently. Use it carefully.
+This module __does no error handling whatsoever__. If you care enough about performance to be using a binary format in the first place, then you'll appreciate the transparency of the pack and unpack methods.
+
+However, this does mean that if you pass in a 9 bit number into an 8 bit field, you'll lose precision silently. Use it carefully.
 
 ## FAQ
 #### What if I need to store strings or objects too?
