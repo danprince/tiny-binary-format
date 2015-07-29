@@ -73,7 +73,7 @@ BinaryFormat.prototype.unpackField = function(packed, targetfieldName) {
   }
 
   return unpackedField;
-}
+};
 
 if(typeof module !== 'undefined' && module.exports) {
   module.exports = BinaryFormat;
