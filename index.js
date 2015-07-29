@@ -27,7 +27,7 @@ BinaryFormat.prototype.pack = function() {
 BinaryFormat.prototype.unpack = function(packed) {
   var field, unpacked, index;
 
-  unpacked = [];
+  unpacked = {};
 
   for(index = this.end; index >= this.start; index--) {
     field = this.fields[index];
