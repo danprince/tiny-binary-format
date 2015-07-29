@@ -73,7 +73,9 @@ describe('Tiny Binary Format', function() {
 
     it('should return an object', function() {
       testCases.forEach(function(test) {
-        assert.equal(typeof Tile.unpack.apply(Tile, test.input), 'object');
+        var unpacked = Tile.unpack.apply(Tile, test.input);
+        assert.equal(typeof unpacked, 'object');
+        assert.equal(unpacked instanceof Array, false);
       });
     });
 
