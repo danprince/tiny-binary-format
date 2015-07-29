@@ -57,6 +57,24 @@ BinaryFormat.prototype.unpackArray = function(packed) {
   return unpacked;
 };
 
+BinaryFormat.prototype.unpackField = function(packed, targetfieldName) {
+  var unpackedField, field, index;
+
+  for(index = this.end; index >= this.start; index--) {
+    field = this.fields[index];
+
+    if (field.name == targetfieldName) {
+      unpackedField = packed & field.mask;
+      break;
+    }
+    else {
+      packed >>= field.length;
+    }
+  }
+
+  return unpackedField;
+}
+
 if(typeof module !== 'undefined' && module.exports) {
   module.exports = BinaryFormat;
 }
