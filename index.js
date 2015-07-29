@@ -25,12 +25,10 @@ BinaryFormat.prototype.pack = function() {
 };
 
 BinaryFormat.prototype.unpack = function(packed) {
-  var unpacked, i;
-
-  unpacked = {};
-
-  for(i = this.end; i >= this.start; i--) {
-    field = this.fields[i];
+  
+  var unpacked = {};
+  for(var i = this.end; i >= this.start; i--) {
+    var field = this.fields[i];
     // use the mask to separate the relevant bits
     unpacked[field.name] = packed & field.mask;
     // shift on for the next field
@@ -41,12 +39,10 @@ BinaryFormat.prototype.unpack = function(packed) {
 };
 
 BinaryFormat.prototype.unpackArray = function(packed) {
-  var unpacked, i;
-
-  unpacked = [];
-
-  for(i = this.end; i >= this.start; i--) {
-    field = this.fields[i];
+  
+  var unpacked = [];
+  for(var i = this.end; i >= this.start; i--) {
+    var field = this.fields[i];
     // use the mask to separate the relevant bits
     unpacked.unshift(packed & field.mask);
     // shift on for the next field
