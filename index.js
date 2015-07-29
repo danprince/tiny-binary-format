@@ -40,11 +40,12 @@ BinaryFormat.prototype.unpack = function(packed) {
 
 BinaryFormat.prototype.unpackArray = function(packed) {
   
-  var unpacked = [];
-  for(var i = this.end; i >= this.start; i--) {
-    var field = this.fields[i];
+  var index = this.end + 1;
+  var unpacked = new Array(index);
+  while (index--) {
+    var field = this.fields[index];
     // use the mask to separate the relevant bits
-    unpacked.unshift(packed & field.mask);
+    unpacked[index] = packed & field.mask;
     // shift on for the next field
     packed >>= field.length;
   }
