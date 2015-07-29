@@ -43,6 +43,8 @@ This module __does no error handling whatsoever__. If you care enough about perf
 
 However, this does mean that if you pass in a 9 bit number into an 8 bit field, you'll lose precision silently. Use it carefully.
 
+As pointed out by [@dioxmat](https://twitter.com/dioxmat), you're still bound by the restrictions of [MAX_SAFE_INTEGER](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER). If you're dealing with integers greater than `2 ^ 53`, then expect things to break.
+
 ## FAQ
 #### What if I need to store strings or objects too?
 If you arrived here looking for a Javascript library for parsing binary format files that include lots of data types, you've come to the wrong place. Go and check out [binary-format](https://www.npmjs.com/package/binary-format)
