@@ -32,6 +32,8 @@ When you need to read the values back, pass the number to either `.unpack` which
 
 ```bash
 npm install tiny-binary-format
+# or
+bower install tiny-binary-format
 ```
 
 ## Gotchas
