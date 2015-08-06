@@ -1,6 +1,6 @@
 {
   "name": "tiny-binary-format",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Get memory efficient using binary formats instead of objects.",
   "main": "index.js",
   "scripts": {
