@@ -1,12 +1,27 @@
 function BinaryFormat(fields) {
+  var offsetTable = {};
+  var maskTable = {};
+
   this.start = 0;
   this.end = fields.length - 1;
 
-  this.fields = fields.map(function(field) {
+  function calculateOffset(index) {
+    var tail = fields.slice(index + 1, fields.length);
+
+    return tail.reduce(function(acc, field) {
+      return acc += field.length;
+    }, 0);
+  }
+
+  this.fields = fields.map(function(field, index) {
     // turns int:n into 2^n-1 where n > 0
-    field.mask = (2 << (field.length - 1)) - 1;
+    maskTable[field.name] = (2 << (field.length - 1)) - 1;
+    offsetTable[field.name] = calculateOffset(index);
     return field;
   });
+
+  this.offsetTable = offsetTable;
+  this.maskTable = maskTable;
 }
 
 BinaryFormat.prototype.pack = function() {
@@ -32,7 +47,7 @@ BinaryFormat.prototype.unpack = function(packed) {
   for(index = this.end; index >= this.start; index--) {
     field = this.fields[index];
     // use the mask to separate the relevant bits
-    unpacked[field.name] = packed & field.mask;
+    unpacked[field.name] = packed & this.maskTable[field.name];
     // shift on for the next field
     packed >>= field.length;
   }
@@ -49,7 +64,7 @@ BinaryFormat.prototype.unpackArray = function(packed) {
   while (index--) {
     field = this.fields[index];
     // use the mask to separate the relevant bits
-    unpacked[index] = packed & field.mask;
+    unpacked[index] = packed & this.maskTable[field.name];
     // shift on for the next field
     packed >>= field.length;
   }
@@ -58,21 +73,7 @@ BinaryFormat.prototype.unpackArray = function(packed) {
 };
 
 BinaryFormat.prototype.unpackField = function(packed, targetfieldName) {
-  var unpackedField, field, index;
-
-  for(index = this.end; index >= this.start; index--) {
-    field = this.fields[index];
-
-    if (field.name == targetfieldName) {
-      unpackedField = packed & field.mask;
-      break;
-    }
-    else {
-      packed >>= field.length;
-    }
-  }
-
-  return unpackedField;
+  return (packed >> this.offsetTable[targetfieldName]) & this.maskTable[targetfieldName];
 };
 
 if(typeof module !== 'undefined' && module.exports) {
