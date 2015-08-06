@@ -1,0 +1,18 @@
+{
+  "name": "tiny-binary-format",
+  "description": "Get memory efficient using binary formats instead of objects.",
+  "main": "index.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/danprince/tiny-binary-format",
+  "authors": [
+    "danthedev.com"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test.js",
+    "tests"
+  ]
+}
