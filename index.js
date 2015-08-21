@@ -14,6 +14,11 @@ function BinaryFormat(fields) {
   }
 
   this.fields = fields.map(function(field, index) {
+    if(field.length > 32) {
+      throw new Error('Javascript only supports bitwise operations for ' +
+          '32 bit integers! ' + field.name + ':' + field.length);
+    }
+
     // turns int:n into 2^n-1 where n > 0
     maskTable[field.name] = (2 << (field.length - 1)) - 1;
     offsetTable[field.name] = calculateOffset(index);

@@ -24,6 +24,13 @@ describe('Tiny Binary Format', function() {
     assert.equal(Tile instanceof BinaryFormat, true);
   });
 
+  it('should throw an error if we create a large field', function() {
+    assert.throws(function() {
+      new BinaryFormat([
+        { length: 40, name: 'too_big' }
+      ]);
+    }, Error);
+  });
 
   describe('#pack', function() {
     var testCases;
