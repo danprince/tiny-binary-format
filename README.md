@@ -53,5 +53,5 @@ If you arrived here looking for a Javascript library for parsing binary format f
 #### It doesn't seem to work for 64 bit floating numbers?
 That's because the Javascript bitwise operators don't either. For a quick workaround, use the [`64-bit-support` branch](https://github.com/danprince/tiny-binary-format/tree/64-bit-support).
 #### What would be a good use case for this library?
-This code was born from a game engine, read more about where it might be useful in the [accompanying blog blost](http://danthedev.com/2015/07/25/binary-in-javascript/).
+This code was born from a game engine, read more about where it might be useful in the [accompanying blog blost](http://danthedev.com/2015/07/25/binary-in-javascript).
 
